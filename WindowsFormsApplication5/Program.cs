@@ -14,6 +14,7 @@ namespace WindowsFormsApplication5
         [STAThread]
         static void Main()
         {
+            int five = 5;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
