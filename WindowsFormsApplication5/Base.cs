@@ -14,7 +14,11 @@ namespace WindowsFormsApplication5
 			if (city == "") return;
 			for (int i = 0; i < this.Count; i++)
 			{
-				if (this[i].Adres.City.ToLower() != city.ToLower()) this.RemoveAt(i);
+				if (this[i].Adres.City.ToLower() != city.ToLower())
+				{
+					this.RemoveAt(i);
+					i--;
+				}
 			}
 		}
 		public void SearchDistrict(string district)
@@ -22,7 +26,11 @@ namespace WindowsFormsApplication5
 			if (district == "") return;
 			for (int i = 0; i < this.Count; i++)
 			{
-				if (this[i].Adres.District.ToLower() != district.ToLower()) this.RemoveAt(i);
+				if (this[i].Adres.District.ToLower() != district.ToLower())
+				{
+					this.RemoveAt(i);
+					i--;
+				}
 			}
 		}
         public void SearchType(string type)
@@ -30,7 +38,11 @@ namespace WindowsFormsApplication5
 			if (type == "") return;
 			for (int i = 0; i < this.Count; i++)
 			{
-				if (this[i].About.Type.ToLower() != type.ToLower()) this.RemoveAt(i);
+				if (this[i].About.Type.ToLower() != type.ToLower())
+				{
+					this.RemoveAt(i);
+					i--;
+				}
 			}
 		}
 		public void SearchRoom(string room)
@@ -39,7 +51,11 @@ namespace WindowsFormsApplication5
 			{
 				for (int i = 0; i < this.Count; i++)
 				{
-					if (this[i].About.Room < Convert.ToInt32(room)) this.RemoveAt(i);
+					if (this[i].About.Room < Convert.ToInt32(room))
+					{
+						this.RemoveAt(i);
+						i--;
+					}
 				}
 			}
 			catch
@@ -57,11 +73,19 @@ namespace WindowsFormsApplication5
 					{
 						if (floord == "")
 						{
-							if (Convert.ToInt32(flooru) < this[i].About.Floor) this.RemoveAt(i);
+							if (Convert.ToInt32(flooru) < this[i].About.Floor)
+							{
+								this.RemoveAt(i);
+								i--;
+							}
 						}
 						else
 						{
-							if (Convert.ToInt32(floord) > this[i].About.Floor) this.RemoveAt(i);
+							if (Convert.ToInt32(floord) > this[i].About.Floor)
+							{
+								this.RemoveAt(i);
+								i--;
+							}
 						}
 					}
 				}
@@ -69,10 +93,57 @@ namespace WindowsFormsApplication5
 				{
 					for (int i = 0; i < this.Count; i++)
 					{
-						if (Convert.ToInt32(flooru) < this[i].About.Floor && Convert.ToInt32(floord) > this[i].About.Floor)
+						if (Convert.ToInt32(flooru) < this[i].About.Floor || Convert.ToInt32(floord) > this[i].About.Floor)
+						{
+
 							this.RemoveAt(i);
+							i--;
+						}
 				    }
 			    }
+			}
+			catch
+			{
+				return;
+			}
+		}
+		public void SearchPlaceOrPrice(string pmin, string pmax)
+		{
+			try
+			{
+				if (pmin == "" || pmax == "")
+				{
+					for (int i = 0; i < this.Count; i++)
+					{
+						if (pmin == "")
+						{
+							if (Convert.ToInt32(pmax) < this[i].About.Floor)
+							{
+								this.RemoveAt(i);
+								i--;
+							}
+						}
+						else
+						{
+							if (Convert.ToInt32(pmin) > this[i].About.Floor)
+							{
+								this.RemoveAt(i);
+								i--;
+							}
+						}
+					}
+				}
+				else
+				{
+					for (int i = 0; i < this.Count; i++)
+					{
+						if (Convert.ToInt32(pmax) < this[i].About.Floor || Convert.ToInt32(pmin) > this[i].About.Floor)
+						{
+							this.RemoveAt(i);
+							i--;
+						}
+					}
+				}
 			}
 			catch
 			{

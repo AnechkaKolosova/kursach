@@ -76,7 +76,7 @@
 			this.comboBox1.FormattingEnabled = true;
 			this.comboBox1.Items.AddRange(new object[] {
             "Хрущовка",
-            "Панельная",
+            "Панельный",
             "Новострой"});
 			this.comboBox1.Location = new System.Drawing.Point(478, 101);
 			this.comboBox1.Name = "comboBox1";
@@ -133,7 +133,7 @@
 			// label4
 			// 
 			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(322, 104);
+			this.label4.Location = new System.Drawing.Point(347, 104);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(106, 25);
 			this.label4.TabIndex = 7;

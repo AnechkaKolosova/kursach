@@ -64,6 +64,12 @@
     <Compile Include="Buy.Designer.cs">
       <DependentUpon>Buy.cs</DependentUpon>
     </Compile>
+    <Compile Include="BuyEvents.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BuyMethod.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Flats.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
