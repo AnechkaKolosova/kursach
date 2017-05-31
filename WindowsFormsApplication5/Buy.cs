@@ -17,24 +17,34 @@ namespace WindowsFormsApplication5
         {
             InitializeComponent();
         }
+
+        
+        //изменение комбобокса на список
+        private void EditCombo(ComboBox c ,List<string> l)
+        {
+            c.Items.Clear();
+            foreach (string i in l)
+            {
+                c.Items.Add(i);
+            }
+        }
+
         //стартовые массивы районов по городам
-        private string[] Kharkiv = new string[3] { "Шевченковский", "Киевский", "ХТЗ" };
-        private string[] Kiev = new string[4] {"Борщаговский", "Печерский", "Соломенский", "Троещенский"};
+        private List<string> Kharkiv = new List<string> { "Шевченковский", "Киевский", "ХТЗ" };
+        private List<string> Kiev = new List<string> { "Борщаговский", "Печерский", "Соломенский", "Троещенский"};
         //изменение списка районов в зависимости от города
         private void  comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (comboBox2.SelectedItem.ToString())
+            switch (comboBox2.SelectedItem.ToString().ToLower())
             {
-                case "Харьков":
+                case "харьков":
                     {
-                        comboBox3.Items.Clear();
-                        comboBox3.Items.AddRange(Kharkiv);
+                        EditCombo(comboBox3, Kharkiv);
                         break;
                     }
-                case "Киев":
+                case "киев":
                     {
-                        comboBox3.Items.Clear();
-                        comboBox3.Items.AddRange(Kiev);
+                        EditCombo(comboBox3, Kiev);
                         break;
                     }
                 default:
@@ -97,5 +107,88 @@ namespace WindowsFormsApplication5
             else
                 e.Handled= true;
         }
-    }
-}
+		//Search
+        private void button1_Click(object sender, EventArgs e)
+        {
+			dataGridView1.Rows.Clear();
+			//foreach (Flat i in Seach())
+			//{
+			//	dataGridView1.Rows.Add(i.Adres.City, i.Adres.District, i.Description.Type, i.Description.Room, i.Description.Floor, i.Description.Place);
+			//}
+		}
+
+	  
+		
+
+		public Base Search()
+		{
+			Base search = Form1.Itself.flats;
+			return 
+		}
+
+		private void button2_Click(object sender, EventArgs e)
+		{
+			if (openFileDialog1.ShowDialog() == DialogResult.Cancel) return;
+
+			dataGridView1.Rows.Clear();
+			string fname = openFileDialog1.FileName;
+			string ftext = System.IO.File.ReadAllText(fname);
+
+			string substring = "System.String[]";
+			if (ftext.IndexOf(substring) != -1)
+			{
+
+				ftext = ftext.Remove(ftext.IndexOf(substring), substring.Length);
+			}
+			Form1.Itself.flats = JsonConvert.DeserializeObject<Base>(ftext);
+
+			foreach(Flat i in Form1.Itself.flats)
+			{
+				dataGridView1.Rows.Add(i.Adres.City, i.Adres.District, i.About.Type, i.About.Room, i.About.Floor, i.About.Place);
+			}
+		}
+
+		
+
+		private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+		{
+			Hide();
+			MyFlats myflats = new MyFlats();
+			myflats.ShowDialog();
+			Close();
+		}
+
+		private void button3_Click(object sender, EventArgs e)
+		{
+			dataGridView1.Rows.Clear();
+			foreach (Flat i in Form1.Itself.flats)
+			{
+				dataGridView1.Rows.Add(i.Adres.City, i.Adres.District, i.About.Type, i.About.Room, i.About.Floor, i.About.Place);
+			}
+		}
+
+		private Base Uniq(Base b)
+		{
+			Base result = new Base();
+			foreach (Flat i in b)
+			{
+				int count = 0;
+				
+				foreach (Flat j in b)
+				{
+					if (i == j)
+					{
+						count++;
+					}
+				}
+				if (count == 1) result.Add(i);
+				
+			}
+			return result;
+		}
+			
+			
+		}
+	}
+
+

@@ -9,45 +9,31 @@ using Newtonsoft.Json;
 
 namespace WindowsFormsApplication5
 {
-    class AllFlats
-    {
-        public List<Flat> Flats { get; set; }
-        public AllFlats (Flat flat)
-            {
-            this.Flats = new List<Flat>();
-            this.Flats.Add(flat);
-            }
-        
-    }
-    class Flat
-    {
-        public string City { get; set; }
-        public string District { get; set; }
-        public string Price { get; set; }
-        public string Type { get; set; }
-        public string Room { get; set; }
-        public string Floor { get; set; }
-        public string Place { get; set; }
-        public string Name { get; set; }
-        public string Number { get; set; }
-        public string Mail { get; set; }
-        public string Description { get; set; }
 
-        //конструктор для квартиры
-        public Flat (string city, string district, string price, string type, string room,
-            string floor, string place, string name, string number, string mail, string description)
+    public class Flat 
+    {
+       public About About { get; set; }
+		public Adress Adres { get; set; }
+		public User UserDate { get; set; }
+       
+       
+		public Flat()
+		{
+
+		}
+        public Flat (Adress adres, About description, User userDate)
         {
-            this.City = city;
-            this.District = district;
-            this.Price = price;
-            this.Type = type;
-            this.Room = room;
-            this.Floor = floor;
-            this.Place = place;
-            this.Name = name;
-            this.Number = number;
-            this.Mail = mail;
-            this.Description = description; 
+			Adres =  adres;
+            About = description;
+			UserDate = userDate;
         }
+		public Flat (string city, string district, double price, string type, double place, int room, int floor, string name, string mail, long number, string description)
+		{
+			Adres = new Adress(city, district);
+			About = new About(price, type, room, floor, place, description);
+			UserDate = new User(name, number, mail);
+		}
+
+       
     }
 }

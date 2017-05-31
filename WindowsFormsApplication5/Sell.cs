@@ -13,9 +13,11 @@ namespace WindowsFormsApplication5
 {
     public partial class Sell : Form
     {
+	
         public Sell()
         {
             InitializeComponent();
+			
         }
 
         private void Sell_Load(object sender, EventArgs e)
@@ -49,17 +51,25 @@ namespace WindowsFormsApplication5
         //добавление квартир
         private void button1_Click(object sender, EventArgs e)
         {
-            Flat flat = new Flat(comboBox1.Text, comboBox2.Text, textBox4.Text, comboBox3.Text,
-                comboBox6.Text, comboBox5.Text, comboBox4.Text, textBox1.Text, textBox2.Text, 
-                textBox3.Text, richTextBox1.Text);
-            AllFlats flats = new AllFlats(flat);
-            string serealized = JsonConvert.SerializeObject(flats) + Environment.GetCommandLineArgs() ;
-            using (StreamWriter output = new StreamWriter(@"\base.txt"))
-            {
-                output.WriteLine(serealized);
-            }
+            Flat flat = new Flat(
+                comboBox1.Text, 
+                comboBox2.Text, 
+				Convert.ToInt32(textBox4.Text), 
+				comboBox3.Text,
+                Convert.ToInt32(comboBox6.Text), 
+				Convert.ToInt32(comboBox5.Text), 
+				Convert.ToInt32(comboBox4.Text), textBox1.Text, textBox2.Text, 
+                Convert.ToInt64(textBox3.Text), richTextBox1.Text);
+			//string serealized1 = JsonConvert.SerializeObject(flat);
+			//richTextBox1.Text = serealized1;
+			if (Form1.Itself.flats == null) Form1.Itself.flats = new Base();
+			Form1.Itself.flats.Add(flat);
+            string serealized = JsonConvert.SerializeObject(Form1.Itself.flats) + Environment.GetCommandLineArgs() ;
+			File.WriteAllText(Form1.Itself.Fname, serealized);
+			
                 //File.AppendAllLines( serealized+@"\base.txt",Eb);
-                //richTextBox1.Text = serealized;
+				
+                
                 //вызов формы подтверждающей добавление
                 Hide();
             Add add = new Add();
@@ -197,6 +207,10 @@ namespace WindowsFormsApplication5
             
         }
 
+   
+         
+
         
+        }
     }
-}
+
