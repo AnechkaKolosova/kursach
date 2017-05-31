@@ -135,9 +135,9 @@
 			this.label4.AutoSize = true;
 			this.label4.Location = new System.Drawing.Point(322, 104);
 			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(150, 25);
+			this.label4.Size = new System.Drawing.Size(106, 25);
 			this.label4.TabIndex = 7;
-			this.label4.Text = "Тип квартиры";
+			this.label4.Text = "Тип дома";
 			// 
 			// label5
 			// 

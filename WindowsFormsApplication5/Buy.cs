@@ -111,21 +111,34 @@ namespace WindowsFormsApplication5
         private void button1_Click(object sender, EventArgs e)
         {
 			dataGridView1.Rows.Clear();
-			//foreach (Flat i in Seach())
-			//{
-			//	dataGridView1.Rows.Add(i.Adres.City, i.Adres.District, i.Description.Type, i.Description.Room, i.Description.Floor, i.Description.Place);
-			//}
+		
+			foreach (Flat i in Search(comboBox2.Text, comboBox3.Text, comboBox1.Text, comboBox4.Text, comboBox5.Text,
+				comboBox6.Text))
+		{
+				dataGridView1.Rows.Add(i.Adres.City, i.Adres.District, i.About.Type, i.About.Room, i.About.Floor);
+		}
 		}
 
 	  
 		
 
-		public Base Search()
+		public Base Search(string city, string district, string type, string room, string fd, string fu)
 		{
 			Base search = Form1.Itself.flats;
-			return 
+			search.SearchCity(city);
+			search.SearchDistrict(district);
+			search.SearchType(type);
+			search.SearchRoom(room);
+			search.SearchFloor(fd, fu);
+
+
+
+			return search;
 		}
 
+		
+
+		
 		private void button2_Click(object sender, EventArgs e)
 		{
 			if (openFileDialog1.ShowDialog() == DialogResult.Cancel) return;
